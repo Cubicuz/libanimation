@@ -2,7 +2,7 @@
 #include <Adafruit_NeoPixel.h>
 
 #define NUM_LEDS 30
-#define DATA_PIN 5
+#define DATA_PIN 5 // this is D1 because of reasons
 
 Adafruit_NeoPixel strip(NUM_LEDS, DATA_PIN, NEO_GRBW + NEO_KHZ800);
 
