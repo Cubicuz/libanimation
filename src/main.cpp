@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
+#include "test.h"
 
 #define NUM_LEDS 30
 #define DATA_PIN 5 // this is D1 because of reasons
@@ -8,10 +9,12 @@ Adafruit_NeoPixel strip(NUM_LEDS, DATA_PIN, NEO_GRBW + NEO_KHZ800);
 
 uint8_t wheel(uint16_t x, uint16_t resolution);
 
+something<uint8_t[17]> b;
 
 void setup()
 {
-
+  a.stuff[15] = 14;
+  b.stuff[1] = 16;
   // put your setup code here, to run once:
   Serial.begin(19200);
   Serial.println("Start");
@@ -31,6 +34,8 @@ void setup()
   }
   strip.show();
 
+  Serial.println(a.stuff[15]);
+  Serial.println(b.stuff[1]);
 }
 
 void loop()
