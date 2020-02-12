@@ -1,4 +1,4 @@
-
+#include <Arduino.h>
 /*
  * wants: 
  *  mapping name -> functionpointer
