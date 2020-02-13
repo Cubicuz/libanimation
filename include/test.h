@@ -1,10 +1,10 @@
 #include <Arduino.h>
 
-template <class mytype>
-class something {
+template <int ledcount>
+class containingFixedsizeArray {
     public:
-        mytype stuff;
+        int stuff [ledcount];
 
 };
 
-something<int[16]> a;
+containingFixedsizeArray<16> a;

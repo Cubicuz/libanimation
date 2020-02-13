@@ -9,7 +9,7 @@ Adafruit_NeoPixel strip(NUM_LEDS, DATA_PIN, NEO_GRBW + NEO_KHZ800);
 
 uint8_t wheel(uint16_t x, uint16_t resolution);
 
-something<uint8_t[17]> b;
+containingFixedsizeArray<17> b;
 
 void setup()
 {
