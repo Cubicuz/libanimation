@@ -30,24 +30,8 @@ public:
   setAnimation(int index);
 };
 
+// some kind of this will be needed
 class Animation{
   const char* name;
-  void animate(AnimatedStrip * ref);
+  void animate();
 };
-
-//#define ANIMATION(numLeds, fkt) { (numLeds), 0, (fkt), (int[numLeds * 3])}
-
-struct NameAndFunction {
-  const char* name;
-  void *fkt(Animation);
-} availableAnimations[5];
-
-void animate(Animation anim);
-
-void setFunction(Animation anim, int index);
-
-void setFunction(Animation anim, const char* name);
-
-void setFunction(Animation anim, void (*fkt));
-
-void initAnimation(Animation anim);
