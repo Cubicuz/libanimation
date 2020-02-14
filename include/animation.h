@@ -14,12 +14,25 @@
  *  currentAnimationState
  *  JSON containing Animation names for autodiscovery
  */
-
-struct Animation{
+template<uint ledCount>
+class AnimatedStrip{
+private:
   const uint16_t ledCount;
   uint8_t progress;
   void (*setPixelColor)(uint16_t, uint8_t, uint8_t, uint8_t);
-  uint8_t *state; // maybe a define can help here
+  uint8_t state [ledCount];
+  uint32_t speed;
+  uint32_t resolution;
+public:
+  void animate();
+  setAnimation(void (*fkt));
+  setAnimation(const char* name);
+  setAnimation(int index);
+};
+
+class Animation{
+  const char* name;
+  void animate(AnimatedStrip * ref);
 };
 
 //#define ANIMATION(numLeds, fkt) { (numLeds), 0, (fkt), (int[numLeds * 3])}
