@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 #include "test.h"
+#include "animation.h"
 
 #define NUM_LEDS 30
 #define DATA_PIN 5 // this is D1 because of reasons
