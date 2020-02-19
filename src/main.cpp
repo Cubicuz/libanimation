@@ -13,11 +13,13 @@ AnimatedStrip<29> animStrip;
 
 void mySetPixelColor(uint32_t i, uint8_t r, uint8_t g, uint8_t b){
   strip.setPixelColor(i, r, g, b, 0);
+/*
   Serial.print(r);
   Serial.print(" ");
   Serial.print(g);
   Serial.print(" ");
   Serial.println(b);
+*/
 }
 
 void setup()
@@ -35,5 +37,7 @@ void setup()
 
 void loop()
 {
+  animStrip.animate();
+  strip.show();
 }
 
