@@ -27,7 +27,7 @@ private:
 public:
 
   void animate(){
-    rainbowMoving();
+    rain();
   }
   void setAnimation(void (*fkt));
   void setAnimation(const char* name);
@@ -45,6 +45,8 @@ public:
   }
 
 private:
+
+// ----------------- Helper functions
   uint8_t wheel(uint32_t x, uint32_t resolution){
     // function looks like ／￣￣＼＿＿
     // is splittet in 4 parts (rising 0, high 1-2, falling 3, low 4-5)
@@ -61,6 +63,42 @@ private:
     } else 
     { // low
       return 0;
+    }
+  }
+
+// ----------------- Animation functions
+  void rain(){
+    uint8_t reduction = 1;
+    uint8_t dropTime = 16;
+    // evaporate
+    for (uint32_t i = 0; i<ledCount*3;i++){
+      if (state[i] > reduction){
+        state[i] -= reduction;
+      } else {
+        state[i] = 0;
+      }
+    }
+    // new drops
+    const uint32_t dropDivisor = 30;
+    const uint8_t dropRadius = 2;
+
+    progress = (1+progress)%dropTime;
+    if (progress == 0){
+      uint32_t drops = random(0, ledCount/dropDivisor+2);
+      for (uint32_t i=0;i<drops;i++){
+        uint32_t position = random(dropRadius-1, ledCount-dropRadius+1);
+        Serial.println(position);
+        uint8_t increment = 255;
+        state[position] = increment;
+        for (uint8_t j=1;j<dropRadius;j++){
+          increment /= 2;
+          state[position+j] = min(255, state[position+j]+increment);
+          state[position-j] = min(255, state[position-j]+increment);
+        }
+      }
+    }
+    for (uint32_t i=0;i<ledCount;i++){
+      setPixelColor(i, 0, 0, state[i]);
     }
   }
 
