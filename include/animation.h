@@ -68,8 +68,11 @@ private:
 
 // ----------------- Animation functions
   void rain(){
-    uint8_t reduction = 1;
-    uint8_t dropTime = 16;
+    const uint8_t reduction = 1;  // reduce intensity per animate
+
+    const uint32_t dropCountDivisor = 30;
+    const uint8_t dropRadius = 2; // radius of a raindrop, 2 means drop is three leds width
+
     // evaporate
     for (uint32_t i = 0; i<ledCount*3;i++){
       if (state[i] > reduction){
@@ -78,23 +81,18 @@ private:
         state[i] = 0;
       }
     }
-    // new drops
-    const uint32_t dropDivisor = 30;
-    const uint8_t dropRadius = 2;
 
-    progress = (1+progress)%dropTime;
-    if (progress == 0){
-      uint32_t drops = random(0, ledCount/dropDivisor+2);
-      for (uint32_t i=0;i<drops;i++){
-        uint32_t position = random(dropRadius-1, ledCount-dropRadius+1);
-        Serial.println(position);
-        uint8_t increment = 255;
-        state[position] = increment;
-        for (uint8_t j=1;j<dropRadius;j++){
-          increment /= 2;
-          state[position+j] = min(255, state[position+j]+increment);
-          state[position-j] = min(255, state[position-j]+increment);
-        }
+    // new drops
+    uint32_t drops = random(0, max(1, ledCount/30)*33)>>5;
+    for (uint32_t i=0;i<drops;i++){
+      uint32_t position = random(dropRadius-1, ledCount-dropRadius+1);
+      Serial.println(position);
+      uint8_t increment = 255;
+      state[position] = increment;
+      for (uint8_t j=1;j<dropRadius;j++){
+        increment /= 2;
+        state[position+j] = min(255, state[position+j]+increment);
+        state[position-j] = min(255, state[position-j]+increment);
       }
     }
     for (uint32_t i=0;i<ledCount;i++){
@@ -109,8 +107,8 @@ private:
   }
 
   void rainbowMoving(){
-    uint32_t resolutionFactor = 32;
-    uint32_t resolution = ledCount * resolutionFactor;
+    const uint32_t resolutionFactor = 32;
+    const uint32_t resolution = ledCount * resolutionFactor;
     progress = (progress + 1) % resolution;
     for (uint32_t i = 0; i<ledCount; i++){
       uint32_t index = i*resolutionFactor+progress;
