@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 #include "test.h"
-#include "animation.h"
+#include "animatedstrip.h"
 
 #define NUM_LEDS 30
 #define DATA_PIN 0 

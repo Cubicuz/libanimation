@@ -91,7 +91,7 @@ private:
     }
 
     // new drops
-    uint32_t drops = random(0, max(1, ledCount/30)*33)>>5;
+    uint32_t drops = random(0, max(1U, ledCount/dropCountDivisor)*33)>>5;
     for (uint32_t i=0;i<drops;i++){
       uint32_t position = random(dropRadius-1, ledCount-dropRadius+1);
       Serial.println(position);
