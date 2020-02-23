@@ -1,3 +1,5 @@
+#ifndef ANIMATED_STRIP_H
+#define ANIMATED_STRIP_H
 #include <Arduino.h>
 #include <vector>
 /*
@@ -17,15 +19,9 @@
  */
 template<uint32_t ledCount>
 class AnimatedStrip{
-private:
-  uint32_t progress;
-  void (*setPixelColor)(uint32_t, uint8_t, uint8_t, uint8_t);
-  uint8_t state [ledCount*3];
-  uint32_t speed;
-  uint32_t resolution;
-
 public:
 
+  
   void animate(){
     rain();
   }
@@ -45,6 +41,18 @@ public:
   }
 
 private:
+  uint32_t progress;
+  void (*setPixelColor)(uint32_t, uint8_t, uint8_t, uint8_t);
+  uint8_t state [ledCount*3];
+  uint32_t speed;
+  uint32_t resolution;
+
+  // some kind of this will be needed
+  struct AnimationListEntry{
+    const char* name;
+    std::function<void()> animate;
+    AnimationListEntry* next;
+  };
 
 // ----------------- Helper functions
   uint8_t wheel(uint32_t x, uint32_t resolution){
@@ -133,8 +141,4 @@ private:
 
 };
 
-// some kind of this will be needed
-class Animation{
-  const char* name;
-  void animate();
-};
+#endif // ANIMATED_STRIP_H
