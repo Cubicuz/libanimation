@@ -1,7 +1,7 @@
 #ifndef ANIMATED_STRIP_H
 #define ANIMATED_STRIP_H
 #include <Arduino.h>
-#include <vector>
+
 /*
  * wants: 
  *  mapping name -> functionpointer
