@@ -10,13 +10,39 @@
 
 namespace Animations{
 
-    void rainbow();
 
-    namespace Helpers
-    {
+    namespace Static{
+        void rainbow(std::function<void(uint32_t, uint8_t, uint8_t, uint8_t)> setPixelColor, uint32_t ledCount);
+
+        /**
+         * memory musst be at least 3*ledCount in size, colormode rgb
+         * */
+        void rainbow(uint8_t* memory, uint32_t ledCount);
+        
+    } // namespace Static
+
+    namespace Dynamic{
+        void rainbow(std::function<void(uint32_t, uint8_t, uint8_t, uint8_t)> setPixelColor, uint32_t ledCount, uint32_t progress);
+
+        /**
+         * memory musst be at least 3*ledCount in size, colormode rgb
+         * */
+        void rainbow(uint8_t* memory, uint32_t ledCount, uint32_t progress);
+        
+       /**
+        * dropRadius: radius of a raindrop, 2 means drop is three leds width
+        * reduction: larger means less drops
+        * reduction: reduce intensity per animate
+        * */
+        void rain(uint8_t* memory, uint32_t ledCount, uint8_t dropRadius = 2, uint32_t dropCountDivisor = 30, uint8_t reduction = 1);
+
+        void sort(uint8_t* memory, uint32_t ledCount);
+    } // namespace Dynamic
+
+    namespace Helper{
         uint8_t wheel(uint32_t x, uint32_t resolution);
     } // namespace Helpers
     
-}
+} // namespace Animations
 
 #endif //ANIMATIONS_H
