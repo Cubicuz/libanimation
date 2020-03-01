@@ -24,6 +24,13 @@ public:
       Animations::Static::rainbow(state, ledCount);
     };
   }
+  AnimatedStrip* addAnimation(AnimationListEntry* ale){
+    AnimationListEntry **iter = &head;
+    while(*iter != NULL){
+      iter = &(**iter.next);
+    }
+    *iter = ale;
+  }
   void animate() { staticRainbow.animate(); }
   void setAnimation(void(*fkt));
   void setAnimation(const char *name);
@@ -54,9 +61,9 @@ private:
     std::function<void()> animate;
     AnimationListEntry *next;
   };
-  AnimationListEntry* head;
-  AnimationListEntry staticRainbow = {"staticrainbow"};
-
+  AnimationListEntry* head = NULL; // rename this !!!
+  AnimationListEntry staticRainbow = {"rainbow"};
+  AnimationListEntry dynamikRainbow = {"rainbowmoving"};
 };
 
 #endif // ANIMATED_STRIP_H
