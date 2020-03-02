@@ -40,8 +40,8 @@ private:
   };
   AnimationListEntry* head = NULL; // rename this !!!
   AnimationListEntry staticRainbow = {"rainbow"};
-  AnimationListEntry dynamikRainbow = {"rainbowmoving"};
-  
+  AnimationListEntry dynamicRainbow = {"rainbowmoving"};
+
 public:
   AnimatedStrip(){
     staticRainbow.animate = [this]{
