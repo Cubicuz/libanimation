@@ -17,19 +17,49 @@
  *  currentAnimationState
  *  JSON containing Animation names for autodiscovery
  */
+#define _DEBUG_
+#ifdef _DEBUG_
+  #define DEBUG_ERROR(message) Serial.print(message)
+#else
+  #define DEBUG_ERROR
+#endif
+
 template <uint32_t ledCount> class AnimatedStrip {
+private:
+  uint32_t progress;
+  void (*setPixelColor)(uint32_t, uint8_t, uint8_t, uint8_t);
+  uint8_t state[ledCount * 3];
+  uint32_t speed;
+  uint32_t resolution;
+
+  // some kind of this will be needed
+  struct AnimationListEntry {
+    const char *name;
+    std::function<void()> animate;
+    AnimationListEntry *next;
+  };
+  AnimationListEntry* head = NULL; // rename this !!!
+  AnimationListEntry staticRainbow = {"rainbow"};
+  AnimationListEntry dynamikRainbow = {"rainbowmoving"};
+  
 public:
   AnimatedStrip(){
     staticRainbow.animate = [this]{
       Animations::Static::rainbow(state, ledCount);
     };
-  }
+  };
   AnimatedStrip* addAnimation(AnimationListEntry* ale){
+    if (ale->next){
+      DEBUG_ERROR("dont add an animation twice");
+      return this;
+    }
     AnimationListEntry **iter = &head;
     while(*iter != NULL){
       iter = &(**iter.next);
     }
     *iter = ale;
+
+    return this;
   }
   void animate() { staticRainbow.animate(); }
   void setAnimation(void(*fkt));
@@ -48,22 +78,7 @@ public:
     this->setPixelColor = setPixelColor;
   }
 
-private:
-  uint32_t progress;
-  void (*setPixelColor)(uint32_t, uint8_t, uint8_t, uint8_t);
-  uint8_t state[ledCount * 3];
-  uint32_t speed;
-  uint32_t resolution;
 
-  // some kind of this will be needed
-  struct AnimationListEntry {
-    const char *name;
-    std::function<void()> animate;
-    AnimationListEntry *next;
-  };
-  AnimationListEntry* head = NULL; // rename this !!!
-  AnimationListEntry staticRainbow = {"rainbow"};
-  AnimationListEntry dynamikRainbow = {"rainbowmoving"};
 };
 
 #endif // ANIMATED_STRIP_H
