@@ -5,17 +5,15 @@
 /*
  * wants:
  *  mapping name -> functionpointer
- *  string array containing function names
+ *  string iterator with function names
+ *  think about putting implementation in a .hpp this files is getting a mess
  *  timerindependant
  *  ref to led memory
  *    bitcount
  *    ledcount
  *      since most animations dont utilize white chanel, ignore it at first
  *    LED-independant
- *  structoriented
  *  selectedFunction
- *  currentAnimationState
- *  JSON containing Animation names for autodiscovery
  */
 #define _DEBUG_
 #ifdef _DEBUG_
