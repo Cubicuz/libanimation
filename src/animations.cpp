@@ -48,7 +48,7 @@ void Animations::Dynamic::rain(uint8_t *memory, uint32_t ledCount,
 
 void Animations::Dynamic::rainbow(
     std::function<void(uint32_t, uint8_t, uint8_t, uint8_t)> setPixelColor,
-    uint32_t ledCount, uint32_t progress, uint32_t resolutionFactor) {
+    uint32_t ledCount, uint32_t &progress, uint32_t resolutionFactor) {
 
   uint32_t resolution = ledCount * resolutionFactor;
   progress = (progress + 1) % resolution;

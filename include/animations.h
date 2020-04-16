@@ -25,7 +25,7 @@ void rainbow(uint8_t *memory, uint32_t ledCount);
 namespace Dynamic {
 void rainbow(
     std::function<void(uint32_t, uint8_t, uint8_t, uint8_t)> setPixelColor,
-    uint32_t ledCount, uint32_t progress, uint32_t resolutionFactor);
+    uint32_t ledCount, uint32_t &progress, uint32_t resolutionFactor);
 
 /**
  * memory musst be at least 3*ledCount in size, colormode rgb
