@@ -61,7 +61,7 @@ void StripWrapper::animate(){
 
         } else if (activeAnimation == RAIN){
             Animations::Dynamic::rain(memory, numPixel);
-            for (uint32_t i=0; i < numPixel, i++){
+            for (uint32_t i=0; i < numPixel; i++){
                 strip->setPixelColor(i, 0, 0, memory[i]);
             }
             strip->show();
