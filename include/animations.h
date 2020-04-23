@@ -36,7 +36,7 @@ void rainbow(uint8_t *memory, uint32_t ledCount, uint32_t progress,
 /**
  * memory: musst be at least ledCount in size, is meant for blue only
  * dropRadius: radius of a raindrop, 2 means drop is three leds width
- * reduction: larger means less drops
+ * dropCountDivisor: larger means less drops
  * reduction: reduce intensity per animate
  * */
 void rain(uint8_t *memory, uint32_t ledCount, uint8_t dropRadius = 2,

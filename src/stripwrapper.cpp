@@ -60,7 +60,7 @@ void StripWrapper::animate(){
             strip->show();
 
         } else if (activeAnimation == RAIN){
-            Animations::Dynamic::rain(memory, numPixel);
+            Animations::Dynamic::rain(memory, numPixel, 2, 10, 20);
             for (uint32_t i=0; i < numPixel; i++){
                 strip->setPixelColor(i, 0, 0, memory[i]);
             }
@@ -89,6 +89,14 @@ void StripWrapper::setAnimation(const char * const functionName){
             memory[i] = 0;
         }
     } else {
+        for (uint8_t i=0;i<sizeof(availableAnimations)/4;i++){
+            if (strcmp(functionName, availableAnimations[i]) == 0){
+                Serial.println("found in loop");
+                Serial.println(availableAnimations[i]);
+                this->activeAnimation = availableAnimations[i];
+                return;
+            }
+        }
         this->activeAnimation = NULL;
         Serial.print("unsupported animation: ");
         Serial.println(functionName);
@@ -117,9 +125,10 @@ StripWrapper::StripWrapper(Adafruit_NeoPixel* strip, uint8_t* memory){
     this->strip = strip;
     numPixel = strip->numPixels();
     if (memory == NULL){
-        memory = new uint8_t [strip->numPixels() * 4];
+        this->memory = new uint8_t [strip->numPixels() * 4];
         memory_self_managed = true;
     } else {
+        this->memory = memory;
         memory_self_managed = false;
     }
     doAnimate = true;

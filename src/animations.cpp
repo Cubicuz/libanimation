@@ -23,7 +23,7 @@ void Animations::Dynamic::rain(uint8_t *memory, uint32_t ledCount,
                                uint8_t dropRadius, uint32_t dropCountDivisor,
                                uint8_t reduction) {
   // evaporate
-  for (uint32_t i = 0; i < ledCount * 3; i++) {
+  for (uint32_t i = 0; i < ledCount; i++) {
     if (memory[i] > reduction) {
       memory[i] -= reduction;
     } else {
@@ -35,13 +35,12 @@ void Animations::Dynamic::rain(uint8_t *memory, uint32_t ledCount,
   uint32_t drops = random(0, max(1U, ledCount / dropCountDivisor) * 33) >> 5;
   for (uint32_t i = 0; i < drops; i++) {
     uint32_t position = random(dropRadius - 1, ledCount - dropRadius + 1);
-    Serial.println(position);
     uint8_t increment = 255;
     memory[position] = increment;
     for (uint8_t j = 1; j < dropRadius; j++) {
       increment /= 2;
-      memory[position + j] = min(255, memory[position + j] + increment);
-      memory[position - j] = min(255, memory[position - j] + increment);
+        memory[position + j] = min(255, memory[position + j] + increment);
+        memory[position - j] = min(255, memory[position - j] + increment);
     }
   }
 }
