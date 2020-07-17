@@ -8,9 +8,11 @@
 // ledCount but i have to test this and it results in a large, meh readable
 // file, witch i dont like
 
-namespace Animations {
+namespace Animations
+{
 
-namespace Static {
+namespace Static
+{
 void rainbow(
     std::function<void(uint32_t, uint8_t, uint8_t, uint8_t)> setPixelColor,
     uint32_t ledCount);
@@ -22,16 +24,8 @@ void rainbow(uint8_t *memory, uint32_t ledCount);
 
 } // namespace Static
 
-namespace Dynamic {
-void rainbow(
-    std::function<void(uint32_t, uint8_t, uint8_t, uint8_t)> setPixelColor,
-    uint32_t ledCount, uint32_t &progress, uint32_t resolutionFactor);
-
-/**
- * memory musst be at least 3*ledCount in size, colormode rgb
- * */
-void rainbow(uint8_t *memory, uint32_t ledCount, uint32_t progress,
-             uint32_t resolutionFactor = 32);
+namespace Dynamic
+{
 
 /**
  * memory: musst be at least ledCount in size, is meant for blue only
@@ -42,11 +36,32 @@ void rainbow(uint8_t *memory, uint32_t ledCount, uint32_t progress,
 void rain(uint8_t *memory, uint32_t ledCount, uint8_t dropRadius = 2,
           uint32_t dropCountDivisor = 30, uint8_t reduction = 1);
 
+void knightrider(
+    std::function<void(uint32_t, uint8_t, uint8_t, uint8_t)> setPixelColor,
+    uint32_t ledCount, uint32_t &progress, uint8_t width);
+
+void rainbow(
+    std::function<void(uint32_t, uint8_t, uint8_t, uint8_t)> setPixelColor,
+    uint32_t ledCount, uint32_t &progress, uint32_t resolutionFactor);
+
+/**
+ * memory musst be at least 3*ledCount in size, colormode rgb
+ * */
+void rainbow(uint8_t *memory, uint32_t ledCount, uint32_t progress,
+             uint32_t resolutionFactor = 32);
+
 void sort(uint8_t *memory, uint32_t ledCount);
+
+void wave(uint8_t *memory, uint32_t ledCount, uint32_t progress, uint32_t width, uint8_t r, uint8_t g, uint8_t b, uint8_t w);
+
+void wave(std::function<void(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t)> setPixelColor,
+          uint32_t ledCount, uint32_t progress, uint32_t width, uint8_t r, uint8_t g, uint8_t b, uint8_t w);
 } // namespace Dynamic
 
-namespace Helper {
+namespace Helper
+{
 uint8_t wheel(uint32_t x, uint32_t resolution);
+
 } // namespace Helper
 
 } // namespace Animations
