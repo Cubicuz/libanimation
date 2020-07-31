@@ -1,5 +1,5 @@
-#ifndef STRIP_WRAPPER
-#define STRIP_WRAPPER
+#ifndef STRIPWRAPPER_HEADER_GUARD
+#define STRIPWRAPPER_HEADER_GUARD
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 
@@ -8,15 +8,19 @@ class StripWrapper
 public:
     // Todo: auslagern
 
+    //constexpr char WAVE = "wave";
+
     // Names of the available animations
-    const char *const KNIGHTRIDER = "knightrider";
-    const char *const SOLID = "solid";
-    const char *const RAIN = "rain";
-    const char *const RAINBOW = "rainbow";
-    const char *const RAINBOWMOVING = "rainbowmoving";
+    static const char *const KNIGHTRIDER;
+    static const char *const SOLID;
+    static const char *const RAIN;
+    static const char *const RAINBOW;
+    static const char *const RAINBOWMOVING;
 
     // Can be modified by you, if you wish to exclude some animations
     const char *const availableAnimations[5] = {SOLID, KNIGHTRIDER, RAINBOW, RAINBOWMOVING, RAIN};
+    const uint8_t availableAnimationCount = sizeof(availableAnimations);
+
 
     void setColor(uint8_t r, uint8_t g, uint8_t b);
     void setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t w);
@@ -54,4 +58,4 @@ private:
     bool warmwhite;
 };
 
-#endif
+#endif // STRIPWRAPPER_HEADER_GUARD

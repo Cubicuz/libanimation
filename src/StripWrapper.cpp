@@ -2,6 +2,14 @@
 #include <Adafruit_NeoPixel.h>
 #include "animations.h"
 
+// Names of the available animations
+    const char *const StripWrapper::KNIGHTRIDER = "knightrider";
+    const char *const StripWrapper::SOLID = "solid";
+    const char *const StripWrapper::RAIN = "rain";
+    const char *const StripWrapper::RAINBOW = "rainbow";
+    const char *const StripWrapper::RAINBOWMOVING = "rainbowmoving";
+
+
 void StripWrapper::setColor(uint8_t r, uint8_t g, uint8_t b)
 {
     this->r = r;

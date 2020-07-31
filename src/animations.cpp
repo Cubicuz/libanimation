@@ -121,12 +121,6 @@ void Animations::Dynamic::rainbow(
     }
 }
 
-void Animations::Dynamic::wave(
-    std::function<void(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t)> setPixelColor,
-    uint32_t ledCount, uint32_t &progress, uint32_t width, uint8_t r, uint8_t g, uint8_t b, uint8_t w)
-{
-}
-
 uint8_t Animations::Helper::wheel(uint32_t x, uint32_t resolution)
 {
     // function looks like ／￣￣＼＿＿
