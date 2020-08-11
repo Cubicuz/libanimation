@@ -102,6 +102,19 @@ void StripWrapper::animate()
     }
 }
 
+const char * StripWrapper::sameAnimationNameButMyPointer(const char *const functionName){
+  for (uint8_t i = 0; i < sizeof(availableAnimations) / 4; i++)
+  {
+      if (strcmp(functionName, availableAnimations[i]) == 0)
+      {
+          Serial.println("found in loop");
+          Serial.println(availableAnimations[i]);
+          return availableAnimations[i];
+      }
+  }
+  return nullptr;
+}
+
 void StripWrapper::setAnimation(const char *const functionName)
 {
     doAnimate = true;

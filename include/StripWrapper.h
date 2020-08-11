@@ -32,6 +32,7 @@ public:
     // needs to be called periodically, produces the next animation step
     void animate();
 
+    const char * sameAnimationNameButMyPointer(const char *const functionName);
     void setAnimation(const char *const functionName);
     const char *const getAnimation();
 
